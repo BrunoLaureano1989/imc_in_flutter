@@ -8,6 +8,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  var userController = TextEditingController(text: "bruno");
+  var passwordController = TextEditingController(text: "123");
+
+  bool isObscureText = true;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,13 +41,19 @@ class _LoginPageState extends State<LoginPage> {
                   height: 10,
                 ),
                 Container(
+                  //adicionar GestureDetector longpress para dicas
                   width: double.infinity,
                   margin: const EdgeInsets.symmetric(horizontal: 30),
                   height: 35,
                   color: Colors.amberAccent,
                   alignment: Alignment.center,
-                  child: const TextField(
-                    decoration: InputDecoration(
+                  child: TextField(
+                    controller: userController,
+                    onChanged: (value) {
+                      //user = value;
+                      //print(value.toString());
+                    },
+                    decoration: const InputDecoration(
                       contentPadding: EdgeInsets.only(top: 0),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -62,38 +73,69 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 Container(
+                  //adicionar GestureDetector longpress para dicas
                   width: double.infinity,
                   margin: const EdgeInsets.symmetric(horizontal: 30),
                   height: 35,
                   color: Colors.amberAccent,
                   alignment: Alignment.center,
-                  child: const TextField(
+                  child: TextField(
+                    obscureText: isObscureText,
+                    controller: passwordController,
+                    onChanged: (value) {
+                      //password = value;
+                      //print(value);
+                    },
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(top: 0),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black),
-                        ),
-                        hintText: "Senha",
-                        hintStyle: TextStyle(color: Colors.black),
-                        prefixIcon: Icon(Icons.password, color: Colors.black),
-                        suffixIcon:
-                            Icon(Icons.visibility_off, color: Colors.black)),
+                      contentPadding: const EdgeInsets.only(top: 0),
+                      enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                      ),
+                      hintText: "Senha",
+                      hintStyle: const TextStyle(color: Colors.black),
+                      prefixIcon:
+                          const Icon(Icons.password, color: Colors.black),
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          setState(() {
+                            isObscureText = !isObscureText;
+                          });
+                        },
+                        child: Icon(
+                            isObscureText
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Colors.black),
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 Container(
+                  //adicionar GestureDetector longpress para dicas
                   width: double.infinity,
                   margin: const EdgeInsets.symmetric(horizontal: 30),
                   alignment: Alignment.center,
                   child: SizedBox(
                     width: double.infinity,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (userController.text.trim() == "bruno" &&
+                            passwordController.text.trim() == "123") {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("Sucesso no login")));
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("error ao fazer o login")));
+                        }
+                      },
                       style: ButtonStyle(
                           shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
