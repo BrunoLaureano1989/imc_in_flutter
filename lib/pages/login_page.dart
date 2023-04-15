@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imc/pages/main_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -130,6 +131,8 @@ class _LoginPageState extends State<LoginPage> {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   content: Text("Sucesso no login")));
+                                  //alterado push para pushReplacement
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainPage()));
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
