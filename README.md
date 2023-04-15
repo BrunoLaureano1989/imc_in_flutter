@@ -33,4 +33,13 @@ add usersclasses construction services
 add Drawer na main page
 
 
+-----------------------------------------------------------------
+
+add Pageviews termo disca e help
+
+BottomNavigationBar com controller jumpToPage na home e pages
+
+-----------------------------------------------------------------
+
+
 

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:imc/pages/dados_cadastro.dart';
 
+import 'dicas_page.dart';
+import 'help_page.dart';
+import 'termo.page.dart';
+
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -9,6 +13,9 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  PageController controller = PageController(initialPage: 0);
+  int positionPage = 0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,61 +58,36 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
         ),
-
-        body: Container(
-          width: double.infinity,
-          margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    color: Colors.white10,
-                    child: const Text(
-                      "nome",
-                      style: TextStyle(color: Colors.black87, fontSize: 25),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                    width: 50,
-                  ),
-                  Container(
-                    color: Colors.white10,
-                    child: const Text(
-                      "image",
-                      style: TextStyle(color: Colors.black87, fontSize: 25),
-                    ),
-                  ),
+        body: Column(
+          children: [
+            Expanded(
+              child: PageView(
+                controller: controller,
+                onPageChanged: (value) {
+                  setState(() {
+                    positionPage = value;
+                  });
+                },
+                children: const [
+                  DicasPage(),
+                  TermoPage(),
+                  HelpPage(),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    color: Colors.white10,
-                    child: const Text(
-                      "date",
-                      style: TextStyle(color: Colors.black87, fontSize: 25),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                    width: 50,
-                  ),
-                  Container(
-                    color: Colors.white10,
-                    child: const Text(
-                      "resultado",
-                      style: TextStyle(color: Colors.black87, fontSize: 25),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+            BottomNavigationBar(
+                onTap: (value) {
+                  controller.jumpToPage(value);
+                },
+                currentIndex: positionPage,
+                items: const [
+                  BottomNavigationBarItem(
+                      label: "Dicas", icon: Icon(Icons.tips_and_updates)),
+                  BottomNavigationBarItem(
+                      label: "home", icon: Icon(Icons.home_max)),
+                  BottomNavigationBarItem(label: "help", icon: Icon(Icons.help))
+                ])
+          ],
         ),
       ),
     );
