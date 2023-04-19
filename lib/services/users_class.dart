@@ -1,7 +1,10 @@
-class UserClass {
+
+
+class Pessoas {
   String _nome = '';
   double _altura = 0;
   double _peso = 0;
+  DateTime _dateInicial = DateTime.now();
 
   void setNome(String nome) {
     _nome = nome;
@@ -25,6 +28,14 @@ class UserClass {
 
   double getPeso() {
     return _peso;
+  }
+
+    void setDate (DateTime dateTime) {
+    _dateInicial = dateTime;
+  }
+
+  DateTime getDate() {
+    return _dateInicial;
   }
 
   calculate(double altura, double peso) {

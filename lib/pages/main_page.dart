@@ -3,7 +3,7 @@ import 'package:imc/pages/dados_cadastro.dart';
 
 import 'dicas_page.dart';
 import 'help_page.dart';
-import 'termo.page.dart';
+import 'lista_imc_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -50,7 +50,7 @@ class _MainPageState extends State<MainPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const CadastroPage()));
+                            builder: (context) =>  const CadastroPage()));
                   },
                 ),
                 const Divider(),
@@ -70,7 +70,7 @@ class _MainPageState extends State<MainPage> {
                 },
                 children: const [
                   DicasPage(),
-                  TermoPage(),
+                  ListImcPage(),
                   HelpPage(),
                 ],
               ),

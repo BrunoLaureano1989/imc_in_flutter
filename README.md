@@ -41,5 +41,19 @@ BottomNavigationBar com controller jumpToPage na home e pages
 
 -----------------------------------------------------------------
 
+criado controller nome, data, altura e peso.
+
+criado modal de text
+
+repository para simular consulta no banco de dados
+
+adicionado ListImcPage classe da home page
+
+adicinado keyboardType de number para peso e altura
+
+label e decoration 
 
 
+
+
+-----------------------------------------------------------------
