@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:imc/services/widget.dart';
+import 'package:imc/repository/imc_calc.dart';
 
 class ListImcPage extends StatefulWidget {
   const ListImcPage({super.key});
@@ -9,23 +9,15 @@ class ListImcPage extends StatefulWidget {
 }
 
 class _ListImcPageState extends State<ListImcPage> {
-
-  String _resultado = "Faca seu cadastro, para verificar o IMC";
-
+  String resultado = "Faca seu cadastro, para verificar o IMC";
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          //crossAxisAlignment: CrossAxisAlignment.center,
-          children:[
-            Container(
-              alignment: Alignment.center,
-              child: TextWidget(texto: _resultado))],
-        ),
-      ),
+    return Container(
+      child:  Text(resultado),
     );
   }
+}
+
+class $ {
 }

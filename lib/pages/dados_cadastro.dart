@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:imc/repository/imc_calc.dart';
+import 'package:imc/services/users_class.dart';
 
 import '../services/widget.dart';
 
@@ -10,18 +12,31 @@ class CadastroPage extends StatefulWidget {
 }
 
 class _CadastroPageState extends State<CadastroPage> {
+  var pessoaRepository = PessoaRepository();
+  var _pessoa = <Pessoa>[];
+
   TextEditingController nomeController = TextEditingController(text: "");
   TextEditingController alturaController = TextEditingController(text: "");
   TextEditingController pesoController = TextEditingController(text: "");
   TextEditingController dataNascimentoController =
       TextEditingController(text: "");
 
-      void _resetCampos () {
-        nomeController.text = "";
-        alturaController.text = "";
-        pesoController.text = "";
-        dataNascimentoController.text = "";
-      }
+  @override
+  void initState() {
+    super.initState();
+    obterPessoa();
+  }
+
+  void obterPessoa() async {
+    _pessoa = await pessoaRepository.listarPessoas();
+  }
+
+  void _resetCampos() {
+    nomeController.text = "";
+    alturaController.text = "";
+    pesoController.text = "";
+    dataNascimentoController.text = "";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -111,13 +126,19 @@ class _CadastroPageState extends State<CadastroPage> {
               width: double.infinity,
               child: TextButton(
                 onPressed: () {
-                  
-                  
-        
-                  
+                  debugPrint(nomeController.toString());
+                  debugPrint(dataNascimentoController.toString());
+                  debugPrint(alturaController.toString());
+                  debugPrint(pesoController.toString());
 
+                  pessoaRepository.addPessoas(Pessoa(
+                      nomeController.text,
+                      alturaController.text,
+                      pesoController.text,
+                      dataNascimentoController.text));
 
-
+                  _resetCampos();
+                  Navigator.pop(context);
                 },
                 style: ButtonStyle(
                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(
@@ -129,6 +150,10 @@ class _CadastroPageState extends State<CadastroPage> {
                 child: const TextWidget(texto: "Salvar"),
               ),
             ),
+            const SizedBox(
+              height: 10,
+              child: Text(""),
+            )
           ],
         ),
       ),

@@ -14,17 +14,14 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   PageController controller = PageController(initialPage: 0);
-  int positionPage = 0;
+  int positionPage = 1;
+ 
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "Verificador de imc",
-          ),
-        ),
+        appBar: AppBar(),        
         // menu hamburguers
         drawer: Drawer(
           child: Padding(
@@ -55,6 +52,22 @@ class _MainPageState extends State<MainPage> {
                 ),
                 const Divider(),
               ],
+            ),
+          ),
+        ),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.fromLTRB(35, 0, 0, 50),
+          child: Container(            
+            alignment: Alignment.bottomCenter,
+            child: FloatingActionButton(
+              child: const Icon(Icons.add),
+              onPressed: () {
+                Navigator.canPop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CadastroPage()));
+              },
             ),
           ),
         ),

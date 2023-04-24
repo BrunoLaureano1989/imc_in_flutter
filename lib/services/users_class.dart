@@ -1,44 +1,47 @@
 
 
-class Pessoas {
+class Pessoa {
   String _nome = '';
-  double _altura = 0;
-  double _peso = 0;
-  DateTime _dateInicial = DateTime.now();
+  String _altura = '';
+  String _peso = '';
+  String _dateInicial = '';
+
+  Pessoa(this._nome, this._altura, this._peso, this._dateInicial);
 
   void setNome(String nome) {
     _nome = nome;
   }
 
-  String getNome() {
+  String get getNome {
     return _nome;
   }
 
-  void setAltura(double altura) {
+  void setAltura(String altura) {
     _altura = altura;
   }
 
-  double getAltura() {
+  String getAltura() {
     return _altura;
   }
 
-  void setPeso(double peso) {
+  void setPeso(String peso) {
     _peso = peso;
   }
 
-  double getPeso() {
+  String getPeso() {
     return _peso;
   }
 
-    void setDate (DateTime dateTime) {
+    void setDate (String dateTime) {
     _dateInicial = dateTime;
   }
 
-  DateTime getDate() {
+  String getDate() {
     return _dateInicial;
   }
 
-  calculate(double altura, double peso) {
+  calculate(altura,peso) {
+    
     try {
       double valor = peso / (altura * altura);
       return valor;
@@ -47,7 +50,7 @@ class Pessoas {
     }
   }
 
-  dynamic tabela(double valor) {
+  dynamic tabela(valor) {
     if (valor < 18.5) {
       return 'magreza';
     } else if (valor >= 18.5 && valor <= 24.9) {
