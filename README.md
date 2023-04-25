@@ -57,3 +57,7 @@ label e decoration
 
 
 -----------------------------------------------------------------
+
+
+adicionado _itemBuilder, FutureBuilder, Navigator of passando construtor, snap.connectionState
+dependencia intl: ^0.18.1 FormatLocaleDate

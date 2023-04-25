@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imc/repository/imc_calc.dart';
 import 'package:imc/services/users_class.dart';
+import 'package:imc/utils/format_date.dart';
 
 import '../services/widget.dart';
 
@@ -82,7 +83,7 @@ class _CadastroPageState extends State<CadastroPage> {
                       firstDate: DateTime(1989, 1, 16),
                       lastDate: DateTime(2099, 12, 31));
                   if (data != null) {
-                    dataNascimentoController.text = data.toString();
+                    dataNascimentoController.text = data.getDate();
                   }
                 }),
             const SizedBox(
@@ -126,19 +127,16 @@ class _CadastroPageState extends State<CadastroPage> {
               width: double.infinity,
               child: TextButton(
                 onPressed: () {
-                  debugPrint(nomeController.toString());
-                  debugPrint(dataNascimentoController.toString());
-                  debugPrint(alturaController.toString());
-                  debugPrint(pesoController.toString());
-
-                  pessoaRepository.addPessoas(Pessoa(
-                      nomeController.text,
-                      alturaController.text,
-                      pesoController.text,
-                      dataNascimentoController.text));
-
+                  // debugPrint(nomeController.toString());
+                  //debugPrint(dataNascimentoController.toString());
+                  //debugPrint(alturaController.toString());
+                  //debugPrint(pesoController.toString());
+                  double peso = double.tryParse(pesoController.text) ?? 0;
+                  double altura = double.tryParse(alturaController.text) ?? 0;
+                  var pessoa = Pessoa(nomeController.text, altura, peso,
+                      dataNascimentoController.text);
                   _resetCampos();
-                  Navigator.pop(context);
+                  Navigator.of(context).pop(pessoa);
                 },
                 style: ButtonStyle(
                   shape: MaterialStatePropertyAll(RoundedRectangleBorder(

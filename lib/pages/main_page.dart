@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imc/pages/dados_cadastro.dart';
+import 'package:imc/repository/imc_calc.dart';
+import 'package:imc/services/users_class.dart';
 
 import 'dicas_page.dart';
 import 'help_page.dart';
@@ -15,7 +17,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   PageController controller = PageController(initialPage: 0);
   int positionPage = 1;
- 
+  PessoaRepository lista = PessoaRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +44,17 @@ class _MainPageState extends State<MainPage> {
                         style: TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 25),
                       )),
-                  onTap: () {
+                  onTap: () async{
                     Navigator.pop(context);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>  const CadastroPage()));
+                    var pessoa = await Navigator.push<Pessoa?>(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CadastroPage()));
+                        if(pessoa !=null){
+                        setState(() {
+lista.addPessoas(pessoa);
+  });
+                        }
                   },
                 ),
                 const Divider(),
@@ -61,12 +68,18 @@ class _MainPageState extends State<MainPage> {
             alignment: Alignment.bottomCenter,
             child: FloatingActionButton(
               child: const Icon(Icons.add),
-              onPressed: () {
+              onPressed: () async{
                 Navigator.canPop(context);
-                Navigator.push(
+                var pessoa = await Navigator.push<Pessoa?>(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const CadastroPage()));
+                        if(pessoa !=null){
+debugPrint(pessoa.getNome);
+  setState(() {
+lista.addPessoas(pessoa);
+  });
+                        }
               },
             ),
           ),
@@ -81,10 +94,10 @@ class _MainPageState extends State<MainPage> {
                     positionPage = value;
                   });
                 },
-                children: const [
-                  DicasPage(),
-                  ListImcPage(),
-                  HelpPage(),
+                children:  [
+                  const DicasPage(),
+                  ListImcPage(lista:lista),
+                  const HelpPage(),
                 ],
               ),
             ),

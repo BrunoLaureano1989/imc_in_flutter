@@ -3,6 +3,8 @@ import 'package:imc/services/users_class.dart';
 class PessoaRepository {
   final List<Pessoa> _pessoas = [];
 
+  String? get getNome => null;
+
   void addPessoas(Pessoa pessoa) async {
     await Future.delayed(const Duration(seconds: 1));
     _pessoas.add(pessoa);
@@ -12,4 +14,5 @@ class PessoaRepository {
     await Future.delayed(const Duration(seconds: 1));
     return _pessoas;
   }
+
 }
